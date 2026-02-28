@@ -331,7 +331,7 @@ The value can be either an absolute file system path or a path relative to the p
 
 <p>
 
-**Type:** `boolean`<br />
+**Type:** `boolean | 'jsx'`<br />
 **Default:** `true`
 </p>
 
@@ -340,11 +340,21 @@ This is an option to minify your HTML output and reduce the size of your HTML fi
 By default, Astro removes whitespace from your HTML, including line breaks, from `.astro` components in a lossless manner.
 Some whitespace may be kept as needed to preserve the visual rendering of your HTML. This occurs both in development mode and in the final build.
 
-To disable HTML compression, set `compressHTML` to false.
+To disable HTML compression, set `compressHTML` to `false`.
 
 ```js
 {
   compressHTML: false
+}
+```
+
+Set `compressHTML` to `'jsx'` to enable JSX-style whitespace stripping, using the same algorithm that Babel, TypeScript, SWC, and esbuild use when compiling JSX. Whitespace stripping is more aggressive and whitespace must be explicitly preserved using expression containers (`{" "}`).
+
+This mode is useful when using Astro with frameworks that use JSX (e.g. React). Component formatting stays the same in Astro and your JSX framework of choice.
+
+```js
+{
+  compressHTML: 'jsx'
 }
 ```
 
@@ -2423,4 +2433,3 @@ Font [variation settings](https://developer.mozilla.org/en-US/docs/Web/CSS/@font
 ```js
 variationSettings: "'xhgt' 0.7"
 ```
-
